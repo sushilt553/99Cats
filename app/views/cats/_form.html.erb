@@ -1,5 +1,5 @@
 <% if type === "Edit"%>
-    <% action = cat_url %>
+    <% action = cat_url(cat) %>
     <% submit = "Update a cat"%>
 <% else%>
     <% action = cats_url %>
@@ -49,3 +49,5 @@
 
     <input type="submit" value=<%= submit %>>
 </form>
+
+<a href="<%= cats_url %>">Home Page</a>
