@@ -6,6 +6,7 @@
 
     <br>
 
+    <label>Sex</label>
     <input type="radio" name="cat[sex]" id="sex_male" value="M">
     <label for="sex_male">Male</label>
 
@@ -14,11 +15,22 @@
 
     <br>
 
-    <select name="cat[color]">
-        <option value="" disabled>--Select a color--</option>
+    <label for="color">Color:</label>
+    <select id="color" name="cat[color]">
+        <option value="" disabled selected>--Select a color--</option>
         <% Cat::CAT_COLORS.each do |color| %>
             <option value="<%= color %>"><%= color %></option>
         <% end%>
     </select>
+
+    <br>
+
+    <label for="date">Birth Date:</label>
+    <input type="date" name="cat[birth_date]" id="date">
+    
+    <br>
+
+    <label for="description">Description:</label>
+    <textarea name="cat[description]" id="description"></textarea>
 
 </form>
