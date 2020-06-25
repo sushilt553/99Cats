@@ -4,5 +4,10 @@ Rails.application.routes.draw do
   root to: 'cats#index'
   resources :cats
 
-  resources :cat_rental_requests, only: [:new, :create]
+  resources :cat_rental_requests, only: [:new, :create] do
+    member do
+      post '/approve', to: 'cat_rental_requests#approve', as: 'approve'
+      post '/deny', to: 'cat_rental_requests#deny', as: 'deny'
+    end
+  end
 end
