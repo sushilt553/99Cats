@@ -15,5 +15,10 @@ class CatRentalRequest < ApplicationRecord
             .where.not('start_date > :end_date OR end_date < :start_date', start_date: self.start_date, end_date: self.end_date)
     end
 
-    
+    def overlapping_approved_requests
+        self.overlapping_requests.where(status: 'APPROVED')
+    end
+
+    def does_not_overlap_approved_request
+    end
 end
