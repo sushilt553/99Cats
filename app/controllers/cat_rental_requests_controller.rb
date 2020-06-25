@@ -6,6 +6,7 @@ class CatRentalRequestsController < ApplicationController
     end
 
     def create
+        @cats = Cat.all
         @cat_rental_request = CatRentalRequest.new(cat_rental_request_params)
 
         if @cat_rental_request.save
