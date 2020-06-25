@@ -1,7 +1,16 @@
-<h1>Edit a Cat</h1>
+<% if type === "Edit"%>
+    <% action = cat_url %>
+    <% submit = "Update a cat"%>
+<% else%>
+    <% action = cats_url %>
+    <% submit = "Create a cat"%>
+<% end%>
 
-<form action="<%= cat_url %>" method="post">
-    <input type="hidden" name="_method" value="patch">
+
+<form action="<%= action %>" method="post">
+    <% if type === "Edit"%>
+        <input type="hidden" name="_method" value="patch">
+    <% end%>
     <label for="name">Name:</label>
     <input type="text" name="cat[name]" id="name" value=<%= @cat.name %>>
 
@@ -38,5 +47,5 @@
 
     <br>
 
-    <input type="submit" value="Edit Cat">
+    <input type="submit" value=<%= submit %>>
 </form>
