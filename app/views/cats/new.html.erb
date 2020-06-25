@@ -1,6 +1,6 @@
 <h1>Create a new Cat</h1>
 
-<form action="" method="post">
+<form action="<%= cats_url %>" method="post">
     <label for="name">Name:</label>
     <input type="text" name="cat[name]" id="name">
 
@@ -33,4 +33,7 @@
     <label for="description">Description:</label>
     <textarea name="cat[description]" id="description"></textarea>
 
+    <br>
+    
+    <input type="submit" value="Create Cat">
 </form>
