@@ -33,10 +33,17 @@
             <td><%= request.start_date %></td>
             <td><%= request.end_date %></td>
             <td><%= request.status %></td>
+            <% if request.status === "PENDING"%>
             <td>
-                <button>Approve</button>
-                <button>Deny</button>
+                <form action="<%= approve_cat_rental_request_url(request) %>" method="post">
+                    <input type="submit" value="Approve">
+                </form>
+
+                <form action="<%= deny_cat_rental_request_url(request) %>" method="post">
+                    <input type="submit" value="Deny">
+                </form>
             </td>
+            <% end%>
             
         </tr>
     <% end %>

@@ -13,7 +13,7 @@ class CatRentalRequest < ApplicationRecord
     def overlapping_requests
         CatRentalRequest
             .where.not(id: self.id)
-            .where(cat_id: self.cat_id)
+            .where(cat_id: cat_id)
             .where.not('start_date > :end_date OR end_date < :start_date', start_date: start_date, end_date: end_date)
     end
 
@@ -28,11 +28,10 @@ class CatRentalRequest < ApplicationRecord
     def approve!
         transaction do
             self.status = 'APPROVED'
-            self.save
+            self.save!
 
             overlapping_pending_requests.each do |request|
-                request.status = 'DENIED'
-                request.save
+                request.update!(status: 'DENIED')
             end
         end
     end
@@ -43,7 +42,7 @@ class CatRentalRequest < ApplicationRecord
     end
 
     def does_not_overlap_approved_request
-
+        return if self.status === "DENIED"
         if !overlapping_approved_requests.empty?
             errors[:base] << "Request conflicts with existing approved request"
         end
