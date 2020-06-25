@@ -26,7 +26,8 @@ class CatsController < ApplicationController
         if @cat.save
             redirect_to cats_url
         else
-            render json: @cat.errors.full_messages, status: :unprocessable_entity
+            flash.now[:errors] = @cat.errors.full_messages
+            render :new
         end
     end
 
@@ -40,9 +41,10 @@ class CatsController < ApplicationController
         @cat = Cat.find_by(id: params[:id])
 
         if @cat.update_attributes(cat_params)
-            redirect_to cat_url(@cat.id)
+            redirect_to cat_url(@cat)
         else
-            render json: @cat.errors.full_messages, status: :unprocessable_entity
+            flash.now[:errors] = @cat.errors.full_messages
+            render :edit
         end
     end
     private
