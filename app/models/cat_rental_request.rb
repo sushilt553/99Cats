@@ -2,6 +2,7 @@ class CatRentalRequest < ApplicationRecord
 
     validates :start_date, :end_date, :status, presence: true
     validates :status, inclusion: {in: %w(APPROVED DENIED PENDING)}
+    validates :does_not_overlap_approved_request
 
     belongs_to :cat,
         primary_key: :id,
@@ -20,5 +21,9 @@ class CatRentalRequest < ApplicationRecord
     end
 
     def does_not_overlap_approved_request
+
+        if !overlapping_approved_requests.empty?
+            errors[:base] = "Request conflicts with existing approved request"
+        end
     end
 end
