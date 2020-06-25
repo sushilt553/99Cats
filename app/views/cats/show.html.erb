@@ -19,7 +19,7 @@
 </table>
 
 <h1>Rental Requests</h1>
-<% if @cat.cat_rental_requests.length > 0 %>
+<% if @rental_requests.length > 0 %>
 <table>
     <tr>
         <th>Start Date</th>
@@ -27,7 +27,7 @@
         <th>Status</th>
     </tr>
     
-    <% @cat.cat_rental_requests.each do |request| %>
+    <% @rental_requests.each do |request| %>
         <tr>
             <td><%= request.start_date %></td>
             <td><%= request.end_date %></td>
