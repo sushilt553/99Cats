@@ -36,7 +36,7 @@ class CatRentalRequestsController < ApplicationController
     end
 
     def current_cat_rental_request
-        cat_rental_requests.find_by(id: params[:id])
+        CatRentalRequest.find_by(id: params[:id])
     end
 
     def require_cat_ownership!
