@@ -1,5 +1,7 @@
 class CatRentalRequestsController < ApplicationController
 
+    before_action :require_login
+
     def new
         @cats = Cat.all
         render :new
