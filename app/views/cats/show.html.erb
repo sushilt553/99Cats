@@ -26,6 +26,7 @@
         <th>End Date</th>
         <th>Status</th>
         <th>Approve or Deny</th>
+        <th>Requester Name</th>
     </tr>
     
     <% @rental_requests.each do |request| %>
@@ -44,6 +45,7 @@
                 </form>
             </td>
             <% end%>
+            <td><%= request.requester.username %></td>
             
         </tr>
     <% end %>
