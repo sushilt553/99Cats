@@ -1,6 +1,7 @@
 class CatRentalRequestsController < ApplicationController
 
     before_action :require_login
+    before_action :require_cat_ownership!, only: [:approve, :deny]
 
     def new
         @cats = Cat.all
@@ -35,7 +36,13 @@ class CatRentalRequestsController < ApplicationController
     end
 
     def current_cat_rental_request
-        CatRentalRequest.find_by(id: params[:id])
+        cat_rental_requests.find_by(id: params[:id])
+    end
+
+    def require_cat_ownership!
+        if !current_user.owns_cat?(current_cat)
+            redirect_to cat_url(current_cat)
+        end
     end
 
     def current_cat

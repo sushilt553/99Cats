@@ -10,6 +10,10 @@ class User < ApplicationRecord
         class_name: :Cat,
         dependent: :destroy
 
+    has_many :cat_rental_requests,
+        through: :cats,
+        source: :cat_rental_requests
+
     attr_reader :password
 
     after_initialize :ensure_session_token
@@ -42,5 +46,9 @@ class User < ApplicationRecord
 
     def ensure_session_token
         self.session_token ||= self.class.generate_session_token
+    end
+
+    def owns_cat?(cat) 
+        cat.user_id == self.id
     end
 end
