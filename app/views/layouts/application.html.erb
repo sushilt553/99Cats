@@ -12,6 +12,14 @@
   <body>
     <%= yield %>
 
+    <% if current_user %>
+      <form action="<%= session_url %>" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+
+        <input type="submit" value="Logout">
+      </form>
+    <% end %>
+
     <% if flash[:errors] %>
       <ul>
         <% flash[:errors].each do |error|%>
