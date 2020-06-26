@@ -9,10 +9,11 @@ class User < ApplicationRecord
         foreign_key: :user_id,
         class_name: :Cat,
         dependent: :destroy
-
+    
     has_many :cat_rental_requests,
-        through: :cats,
-        source: :cat_rental_requests
+        primary_key: :id,
+        foreign_key: :user_id,
+        class_name: :CatRentalRequest
 
     attr_reader :password
 
